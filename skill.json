@@ -1,0 +1,75 @@
+{
+  "name": "genpark-personal-agent-circadian-chronotype-smart-alarm-optimizer-skill",
+  "title": "Circadian Chronotype & Smart Alarm Optimizer Skill",
+  "version": "1.0.0",
+  "description": "Circadian biological rhythm chronotype scoring, ultradian 90-minute sleep cycle phase alignment, sleep inertia dampening wakeup window calculator, and morning cortisol awakening response (CAR) sunlight exposure scheduler. Built for GenPark (https://www.genpark.ai).",
+  "homepage": "https://www.genpark.ai",
+  "organization": {
+    "name": "GenPark Inc.",
+    "url": "https://www.genpark.ai",
+    "linkedin": "https://www.linkedin.com/company/92955550"
+  },
+  "mcp_version": "2024-11-05",
+  "category": "personal-agent",
+  "tools": [
+    {
+      "name": "calculate_optimal_wake_window",
+      "description": "Calculate optimal sleep cycle completion wakeup windows (1.5h ultradian cycles) and morning light exposure timing based on bedtime and chronotype.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "bedtime_iso": {
+            "type": "string",
+            "description": "Planned bedtime (e.g. 23:15)"
+          },
+          "sleep_latency_minutes": {
+            "type": "integer",
+            "description": "Average minutes to fall asleep, e.g. 15"
+          },
+          "target_cycles": {
+            "type": "integer",
+            "description": "Desired 90-minute sleep cycles (typically 4, 5, or 6)"
+          },
+          "chronotype": {
+            "type": "string",
+            "enum": [
+              "lion_early",
+              "bear_moderate",
+              "wolf_night",
+              "dolphin_light"
+            ]
+          }
+        },
+        "required": [
+          "bedtime_iso",
+          "target_cycles",
+          "chronotype"
+        ]
+      }
+    },
+    {
+      "name": "assess_sleep_inertia_mitigation",
+      "description": "Generate physiological protocol to minimize morning sleep inertia (adenosine clearance, lux-level phototherapy, hydration).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "wake_state": {
+            "type": "string",
+            "enum": [
+              "light_sleep",
+              "deep_slow_wave",
+              "rem_sleep"
+            ]
+          },
+          "sleep_debt_minutes": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "wake_state",
+          "sleep_debt_minutes"
+        ]
+      }
+    }
+  ]
+}
